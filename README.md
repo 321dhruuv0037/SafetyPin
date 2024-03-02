@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-# test1
-=======
-# SafetyPin# test1
->>>>>>> Stashed changes
+# SafetyPin
 
 A new Flutter project.
 
