@@ -3,10 +3,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:test1/Screens/my_busstops.dart';
+import 'package:test1/Screens/my_firestations.dart';
+import 'package:test1/Screens/my_hospital.dart';
+import 'package:test1/Screens/my_medicals.dart';
+import 'package:test1/Screens/my_police.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:permission_handler/permission_handler.dart';
 // import 'package:sms_advanced/sms_advanced.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -129,66 +135,38 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Text('Police Stations'),
                 leading: Icon(Icons.local_police_outlined),
                 onTap: () async {
-                  try {
-                    await launchUrl(Uri.parse(
-                        "https://www.google.com/maps/search/police+station+near+me"));
-                  } catch (e) {
-                    print("Could not launch Google Maps link" + e.toString());
-                  }
-                  ;
-                },
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyPolice()));
+                }
               ),
               ListTile(
                 title: Text('Hospitals'),
                 leading: Icon(Icons.local_hospital_outlined),
                 onTap: () async {
-                  try {
-                    await launchUrl(Uri.parse(
-                        "https://www.google.com/maps/search/hospitals+near+me"));
-                  } catch (e) {
-                    print("Could not launch Google Maps link" + e.toString());
-                  }
-                  ;
-                },
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHospital()));
+                }
               ),
               ListTile(
                 title: Text('Medicals'),
                 leading: Icon(Icons.medication_outlined),
                 onTap: () async {
-                  try {
-                    await launchUrl(Uri.parse(
-                        "https://www.google.com/maps/search/medicals+near+me"));
-                  } catch (e) {
-                    print("Could not launch Google Maps link" + e.toString());
-                  }
-                  ;
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyMedicals()));
                 },
               ),
               ListTile(
                 title: Text('Bus Stops'),
                 leading: Icon(Icons.directions_bus_outlined),
                 onTap: () async {
-                  try {
-                    await launchUrl(Uri.parse(
-                        "https://www.google.com/maps/search/bus+stops+near+me"));
-                  } catch (e) {
-                    print("Could not launch Google Maps link" + e.toString());
-                  }
-                  ;
-                },
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyBusstops()));
+                }
               ),
               ListTile(
                 title: Text('Fire Stations'),
                 leading: Icon(Icons.fire_extinguisher_outlined),
                 onTap: () async {
-                  try {
-                    await launchUrl(Uri.parse(
-                        "https://www.google.com/maps/search/fire+stations+near+me"));
-                  } catch (e) {
-                    print("Could not launch Google Maps link" + e.toString());
-                  }
-                  ;
-                },
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyFirestation()));
+
+    }
               ),
               ElevatedButton(
                 onPressed: () => _makePhoneCall("9130102407"),

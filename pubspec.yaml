@@ -39,6 +39,8 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   permission_handler: ^11.3.0
   # flutter_sms: ^2.3.3
+  flutter_inappwebview: ^6.0.0
+
 
 dev_dependencies:
   flutter_test:
