@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test1/Screens/note_screen.dart';
 import 'package:test1/Screens/notes_screen.dart';
-import 'home.dart'; // Import your Home widget
-import 'package:test1/Screens/note_screen.dart'; // Import your NoteScreen widget
+import 'home.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,54 +13,49 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainScreen(), // Set MainScreen as the main page
+      home: MainApp(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MainScreen extends StatefulWidget {
+class MainApp extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _MainAppState createState() => _MainAppState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainAppState extends State<MainApp> {
   int _selectedIndex = 0;
-
-  static List<Widget> _widgetOptions = <Widget>[
-    Home(), // Use your Home widget here
-    NoteScreen(), // Use your NoteScreen widget here
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (_selectedIndex == 1) { // Check if "Contacts" tab is selected
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => NotesScreen()),
-        );
-      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          Home(),
+          NotesScreen(),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contacts),
-            label: 'Contacts',
-          ),
+              icon: Icon(Icons.contacts), label: 'Contacts'),
         ],
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.red[900], // Active icon color
+        selectedLabelStyle:
+            TextStyle(color: Colors.red[900]), // Active label color
+        unselectedItemColor: Colors.grey[600], // Inactive icon color
+        unselectedLabelStyle:
+            TextStyle(color: Colors.grey[600]), // Inactive label color
         onTap: _onItemTapped,
       ),
     );

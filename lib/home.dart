@@ -1,23 +1,39 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:test1/Screens/my_busstops.dart';
-import 'package:test1/Screens/my_firestations.dart';
-import 'package:test1/Screens/my_hospital.dart';
-import 'package:test1/Screens/my_medicals.dart';
-import 'package:test1/Screens/my_police.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:test1/model/navBar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../screens/notes_screen.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (_selectedIndex == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const NotesScreen()),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double buttonsize = screenHeight * 0.2;
     return Scaffold(
       appBar: AppBar(
-        title: Text('SOS Button'),
+        title: const Text('SOS Button'),
       ),
       body: Center(
         child: ElevatedButton(
@@ -27,78 +43,12 @@ class Home extends StatelessWidget {
             backgroundColor: Colors.red.shade900,
             foregroundColor: Colors.white,
             fixedSize: Size.square(buttonsize),
-            shape: CircleBorder(),
-            padding: EdgeInsets.all(24),
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(24),
           ),
         ),
       ),
-      drawer: Drawer(
-        backgroundColor: const Color.fromARGB(255, 237, 221, 223),
-        child: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.only(left: 16),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Facilities Near You",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              ListTile(
-                  title: Text('Police Stations'),
-                  leading: Icon(Icons.local_police_outlined),
-                  onTap: () async {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyPolice()));
-                  }
-              ),
-              ListTile(
-                  title: Text('Hospitals'),
-                  leading: Icon(Icons.local_hospital_outlined),
-                  onTap: () async {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHospital()));
-                  }
-              ),
-              ListTile(
-                title: Text('Medicals'),
-                leading: Icon(Icons.medication_outlined),
-                onTap: () async {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyMedicals()));
-                },
-              ),
-              ListTile(
-                  title: Text('Bus Stops'),
-                  leading: Icon(Icons.directions_bus_outlined),
-                  onTap: () async {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyBusstops()));
-                  }
-              ),
-              ListTile(
-                  title: Text('Fire Stations'),
-                  leading: Icon(Icons.fire_extinguisher_outlined),
-                  onTap: () async {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyFirestation()));
-                  }
-              ),
-              ElevatedButton(
-                onPressed: () => _makePhoneCall("9130102407"),
-                // onPressed: () => _makePhoneCall("9757023141"),
-                child: Text('Make Emergency Call'),
-                style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(Colors.red.shade900)
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: const NavBar(),
     );
   }
 
@@ -118,7 +68,7 @@ class Home extends StatelessWidget {
       double latitude = position.latitude;
       double longitude = position.longitude;
       Uri mapsLink =
-      Uri.parse("https://www.google.com/maps?q=$latitude,$longitude");
+          Uri.parse("https://www.google.com/maps?q=$latitude,$longitude");
 
       return mapsLink;
     } catch (e) {
@@ -137,22 +87,21 @@ class Home extends StatelessWidget {
         phoneNumber += number + ",";
       }
       if (Platform.isAndroid) {
-        String uri = 'sms:$phoneNumber?body=${message}';
-        await launch(uri);
+        Uri uri = Uri.parse('sms:$phoneNumber?body=${message}');
+        await launchUrl(uri);
       } else if (Platform.isIOS) {
-        String uri = 'sms:$phoneNumber&body=${message}';
-        await launch(uri);
+        Uri uri = Uri.parse('sms:$phoneNumber&body=${message}');
+        await launchUrl(uri);
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Some error occurred. Please try again!'),
         ),
       );
       print("Error sending SMS: $e");
     }
   }
-
 
   _sendSOS(BuildContext context) async {
     List<String> phoneNumber = [
@@ -171,14 +120,15 @@ class Home extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Permission Required"),
-              content: Text("Location permission is required to use this feature."),
+              title: const Text("Permission Required"),
+              content: const Text(
+                  "Location permission is required to use this feature."),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("OK"),
+                  child: const Text("OK"),
                 ),
               ],
             );
