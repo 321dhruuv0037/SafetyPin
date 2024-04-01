@@ -77,7 +77,7 @@ class _MyMedicalsState extends State<MyMedicals> {
           "https://www.google.com/maps/search/Medicals/@${currentPosition!.latitude},${currentPosition!.longitude},15z";
     }
     try {
-      await launchUrl(url);
+      await launchUrl(Uri.parse(url));
     } catch (e) {
       print('Error launching Google Maps: $e');
       // Handle error, for example, show a snackbar or retry logic
