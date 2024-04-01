@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "238062343667",
+    "project_id": "safety-pin-1b6e7",
+    "storage_bucket": "safety-pin-1b6e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238062343667:android:86180577115d8dcb902e86",
+        "android_client_info": {
+          "package_name": "com.example.test1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiDOmNzezzuZHCJlXx6ch6VcZkkchJtfs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
