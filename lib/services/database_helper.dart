@@ -36,6 +36,18 @@ class DatabaseHelper {
     );
   }
 
+  static Future<List<String>> getAllPhoneNumbers() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps = await db.query("Note", columns: ["description"]);
+
+    if (maps.isEmpty) {
+      return []; // Return an empty list if no descriptions are found
+    }
+
+    return List.generate(maps.length, (index) => maps[index]["description"] as String);
+  }
+
   static Future<List<Note>?> getAllNotes() async {
     final db = await _getDB();
 

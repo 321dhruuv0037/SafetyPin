@@ -6,7 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:test1/model/navBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../screens/notes_screen.dart';
-
+import 'package:test1/services/database_helper.dart';
 class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
@@ -104,13 +104,16 @@ class _HomeState extends State<Home> {
   }
 
   _sendSOS(BuildContext context) async {
-    List<String> phoneNumber = [
-      "+919757023141",
-      "+919082307960",
-      "+919130102407",
-      // "+91 72496 00529"
-    ];
+    List<String> phoneNumber = [];
+    // List<String> phoneNumber = [
+    //   "+919757023141",
+    //   "+919082307960",
+    //   "+919130102407",
+    //   // "+91 72496 00529"
+    // ];
 
+    phoneNumber = await DatabaseHelper.getAllPhoneNumbers();
+    print(phoneNumber);
     _launchSms(context, phoneNumber);
 
     var status = await Permission.location.status;
