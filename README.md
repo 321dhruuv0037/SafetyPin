@@ -1,20 +1,78 @@
-<<<<<<< HEAD
 # SafetyPin
 
-A new Flutter project.
+SafetyPin is an SOS application developed using Flutter, allowing users to quickly access emergency contacts and share their location in case of emergencies.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Add and manage emergency contacts.
+- Send SOS messages with your current location to predefined emergency contacts.
+- Direct calling functionality for emergency contacts.
+- View location on a map.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[Add screenshots of app here]
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# SafetyPin
->>>>>>> a068d1799dd68eb8560540fe96c627a62da00b3c
+## Technologies Used
+
+- Flutter
+- SQLite
+- sqflite package
+- Geolocation
+- URL Launcher
+- Flutter Phone Direct Caller
+
+## Installation
+
+1. Clone this repository:
+
+```bash
+git clone https://github.com/321dhruuv0037/SafetyPin.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd SafetyPin
+```
+
+3. Install dependencies:
+
+```bash
+flutter pub get
+```
+
+4. Run the app:
+
+```bash
+flutter run
+```
+
+## Usage
+
+- Upon launching the app, you'll have options to add emergency contacts.
+- To add an emergency contact, navigate to the contacts section and input their details.
+- In case of an emergency, press the SOS button to send an SOS message with your current location to all predefined emergency contacts.
+- You can also directly call emergency contacts by tapping on their phone numbers.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature`)
+3. Make your changes
+4. Commit your changes (`git commit -am 'Add new feature'`)
+5. Push to the branch (`git push origin feature`)
+6. Create a new Pull Request
+
+## Developers
+
+SafetyPin is developed and maintained by the following contributors:
+
+- [Aditya Kareer](https://github.com/AdityaKareer)
+- [Advay Gujar](https://github.com/AdvayGujar)
+- [Dhruuv Naik](https://github.com/321dhruuv0037)
+- [Srujana Makarande](https://github.com/srujana2310)
+
+If you'd like to contribute to this project, feel free to reach out to any of the developers listed above or submit a pull request as mentioned in the "Contributing" section.
