@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "238062343667",
-    "project_id": "safety-pin-1b6e7",
-    "storage_bucket": "safety-pin-1b6e7.appspot.com"
+    "project_number": "762913277322",
+    "project_id": "blogs-bbd8d",
+    "storage_bucket": "blogs-bbd8d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:238062343667:android:86180577115d8dcb902e86",
+        "mobilesdk_app_id": "1:762913277322:android:b5112e88ace6c40bd13473",
         "android_client_info": {
           "package_name": "com.example.test1"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCiDOmNzezzuZHCJlXx6ch6VcZkkchJtfs"
+          "current_key": "AIzaSyDb6LPGoCcVYam6psvs7BP7o63CyfvTvm0"
         }
       ],
       "services": {
