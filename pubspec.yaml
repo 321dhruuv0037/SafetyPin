@@ -45,6 +45,8 @@ dependencies:
   cloud_firestore: ^4.16.1
   firebase_core: ^2.29.0
   firebase_storage: ^11.7.1
+  shake_event: ^0.0.9
+  flutter_sensors: ^1.0.1
 
 
 
