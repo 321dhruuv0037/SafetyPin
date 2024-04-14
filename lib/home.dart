@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sensors/sensors.dart'; // Import sensors package
 import 'package:test1/model/navBar.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../screens/notes_screen.dart';
+import 'package:test1/screens/notes_screen.dart'; // Adjusted import path
 import 'package:test1/services/database_helper.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
@@ -14,6 +16,19 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start listening to sensor events
+    accelerometerEvents.listen((AccelerometerEvent event) {
+      // Check for shaking motion (you can adjust the threshold as needed)
+      if (event.x.abs() > 12 || event.y.abs() > 12 || event.z.abs() > 12) {
+        // Shake detected, trigger SOS action here
+        _sendSOS(context);
+      }
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -68,7 +83,7 @@ class _HomeState extends State<Home> {
       double latitude = position.latitude;
       double longitude = position.longitude;
       Uri mapsLink =
-          Uri.parse("https://www.google.com/maps?q=$latitude,$longitude");
+      Uri.parse("https://www.google.com/maps?q=$latitude,$longitude");
 
       return mapsLink;
     } catch (e) {
