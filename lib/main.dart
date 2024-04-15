@@ -7,14 +7,16 @@ import 'home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure that Flutter is initialized
   await Firebase.initializeApp(); // Initialize Firebase
+
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+
         primarySwatch: Colors.blue,
       ),
       home: MainApp(),

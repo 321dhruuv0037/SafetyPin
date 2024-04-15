@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '';
+import 'model/navBar.dart';
 
 class Activity extends StatefulWidget {
   const Activity({Key? key}) : super(key: key);
@@ -32,9 +34,10 @@ class _ActivityState extends State<Activity> {
         ),
       ),
       home: Scaffold(
+        drawer: const NavBar(),
+
         appBar: AppBar(
-          title: Text('Activities'),
-          backgroundColor: Colors.pinkAccent, // Setting app bar color
+          title: Text('Activities'), // Setting app bar color
         ),
         body: Center(
           child: StreamBuilder(
