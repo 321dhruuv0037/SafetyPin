@@ -20,17 +20,19 @@ class DatabaseHelper {
 
   Future<Database> initDb() async {
     String path = join(await getDatabasesPath(), 'emergency_contacts.db');
-    return await openDatabase(path, version: 1, onCreate: _createDb);
+    return openDatabase(path, version: 1, onCreate: _createDb);
   }
 
   Future<void> _createDb(Database db, int newVersion) async {
     await db.execute('''
       CREATE TABLE emergency_contacts(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id INTEGER PRIMARY KEY,
         name TEXT,
         phoneNumber TEXT
       )
-    ''');
+    ''').catchError((error) {
+      print("Error creating table: $error");
+    });
   }
 
   Future<int> insertContact(EmergencyContact contact) async {
@@ -40,17 +42,19 @@ class DatabaseHelper {
 
   Future<List<EmergencyContact>> getContacts() async {
     final dbClient = await db;
-    final List<Map<String, dynamic>> maps =
-    await dbClient.query('emergency_contacts');
+    final List<Map<String, dynamic>> maps = await dbClient.query('emergency_contacts');
     return List.generate(maps.length, (i) {
-      return EmergencyContact.fromMap(maps[i]);
+      return EmergencyContact(
+        id: maps[i]['id'],
+        name: maps[i]['name'],
+        phoneNumber: maps[i]['phoneNumber'],
+      );
     });
   }
 
   Future<int> deleteContact(int id) async {
     final dbClient = await db;
-    return await dbClient
-        .delete('emergency_contacts', where: 'id = ?', whereArgs: [id]);
+    return await dbClient.delete('emergency_contacts', where: 'id = ?', whereArgs: [id]);
   }
 }
 
@@ -64,14 +68,4 @@ class EmergencyContact {
   Map<String, dynamic> toMap() {
     return {'id': id, 'name': name, 'phoneNumber': phoneNumber};
   }
-
-  factory EmergencyContact.fromMap(Map<String, dynamic> map) {
-    return EmergencyContact(
-      id: map['id'],
-      name: map['name'],
-      phoneNumber: map['phoneNumber'],
-    );
-  }
 }
-
-

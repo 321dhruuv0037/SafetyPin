@@ -10,8 +10,6 @@ import 'package:test1/services/database_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
-    // Add this line
-
   @override
   State<Home> createState() => _HomeState();
 }
@@ -22,7 +20,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    // Start listening to sensor events
     accelerometerEvents.listen((AccelerometerEvent event) {
       // Check for shaking motion (you can adjust the threshold as needed)
       if (event.x.abs() > 12 || event.y.abs() > 12 || event.z.abs() > 12) {

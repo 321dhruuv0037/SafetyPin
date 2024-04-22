@@ -2,34 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:test1/model/note_model.dart';
 import 'package:test1/services/database_helper.dart';
 
-class NoteScreen extends StatelessWidget {
+class NoteScreen extends StatefulWidget {
   final Note? note;
+
   const NoteScreen({Key? key, this.note}) : super(key: key);
 
   @override
+  _NoteScreenState createState() => _NoteScreenState();
+}
+
+class _NoteScreenState extends State<NoteScreen> {
+  late TextEditingController titleController;
+  late TextEditingController descriptionController;
+
+  @override
+  void initState() {
+    super.initState();
+    titleController = TextEditingController(text: widget.note?.title ?? '');
+    descriptionController =
+        TextEditingController(text: widget.note?.description ?? '');
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  String? validateContactNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Contact number cannot be empty';
+    } else if (value.length < 10) {
+      return 'Contact number must be at least 10 digits long';
+    } else if (!RegExp(r'^[0-9()-\s]+$').hasMatch(value)) {
+      return 'Contact number can only contain numbers, hyphens, parentheses, and spaces';
+    }
+    return null;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final titleController = TextEditingController();
-    final descriptionController = TextEditingController();
-
-    if (note != null) {
-      titleController.text = note!.title;
-      descriptionController.text = note!.description;
-    }
-
-    String? validateContactNumber(String? value) {
-      if (value == null || value.isEmpty) {
-        return 'Contact number cannot be empty';
-      } else if (value.length < 10) {
-        return 'Contact number must be 10 digits long';
-      } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-        return 'Contact number can only contain numbers';
-      }
-      return null;
-    }
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(note == null ? 'Add Emergency Contact' : 'Edit Contact'),
+        title: Text(widget.note == null ? 'Add Emergency Contact' : 'Edit Contact'),
         centerTitle: true,
       ),
       body: Padding(
@@ -101,7 +117,9 @@ class NoteScreen extends StatelessWidget {
                 ),
               ),
               keyboardType: TextInputType.number,
-              onChanged: (str) {},
+              onChanged: (str) {
+                // Add your logic here if needed
+              },
             ),
             const Spacer(),
             Padding(
@@ -111,8 +129,8 @@ class NoteScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
                   onPressed: () async {
-                    final title = titleController.value.text;
-                    final description = descriptionController.value.text;
+                    final title = titleController.text;
+                    final description = descriptionController.text;
 
                     if (title.isEmpty || description.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -123,12 +141,22 @@ class NoteScreen extends StatelessWidget {
                       return;
                     }
 
+                    if (description.length < 10) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please enter a valid mobile number!'),
+                        ),
+                      );
+                      return;
+                    }
+
                     final Note model = Note(
                       title: title,
                       description: description,
-                      id: note?.id,
+                      id: widget.note?.id,
                     );
-                    if (note == null) {
+
+                    if (widget.note == null) {
                       await DatabaseHelper.addNote(model);
                     } else {
                       await DatabaseHelper.updateNote(model);
@@ -138,10 +166,10 @@ class NoteScreen extends StatelessWidget {
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith(
-                      (states) => Color.fromARGB(255, 225, 160, 160),
+                          (states) => Color.fromARGB(255, 225, 160, 160),
                     ),
                     foregroundColor: MaterialStateProperty.resolveWith(
-                      (states) => Colors.white,
+                          (states) => Colors.white,
                     ),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
@@ -154,7 +182,7 @@ class NoteScreen extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    note == null ? 'Save' : 'Save Changes',
+                    widget.note == null ? 'Save' : 'Save Changes',
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),
