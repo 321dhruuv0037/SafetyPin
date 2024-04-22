@@ -7,8 +7,6 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:test1/model/navBar.dart';
 
 
-// Importing your NavBar widget
-import 'model/navBar.dart';
 
 void main() {
   runApp(MyApp());
