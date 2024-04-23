@@ -22,7 +22,8 @@ class NoteWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 15),
         child: Card(
           elevation: 2,
-          // color: Color.fromARGB(255, 255, 172, 172), // Set the background color here
+          // color: Colors.pink[50],
+          // color: Color.fromARGB(252, 228, 236, 100), // Set the background color here
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -46,9 +47,10 @@ class NoteWidget extends StatelessWidget {
                 ),
                 Text(
                   note.description,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
+                    // color: Colors.red.shade900,
                   ),
                 ),
               ],

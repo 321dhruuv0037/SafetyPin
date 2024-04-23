@@ -54,7 +54,7 @@ class _MainAppState extends State<MainApp> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.contacts), label: 'Contacts'),
-          BottomNavigationBarItem(icon: Icon(Icons.access_time), label: 'Activities')
+          BottomNavigationBarItem(icon: Icon(Icons.article_outlined), label: 'Articles')
 
         ],
         currentIndex: _selectedIndex,

@@ -6,8 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:test1/model/navBar.dart';
 
-
-
 void main() {
   runApp(MyApp());
 }
@@ -64,7 +62,8 @@ class _ActivityState extends State<Activity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Activities'),
+        title: Text('Articles'),
+        centerTitle: true,
       ),
       // Including the NavBar widget here
       drawer: NavBar(),
@@ -72,34 +71,40 @@ class _ActivityState extends State<Activity> {
         child: _pdfFiles.isEmpty
             ? CircularProgressIndicator()
             : ListView.builder(
-          itemCount: _pdfFiles.length,
-          itemBuilder: (context, index) {
-            File file = _pdfFiles[index];
-            String fileName = file.path.split('/').last;
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PDFViewer(
-                      title: fileName.replaceAll('.pdf', ''),
-                      file: file,
+                itemCount: _pdfFiles.length,
+                itemBuilder: (context, index) {
+                  File file = _pdfFiles[index];
+                  String fileName = file.path.split('/').last;
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PDFViewer(
+                            title: fileName.replaceAll('.pdf', ''),
+                            file: file,
+                          ),
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      title: Text(
+                        fileName.replaceAll('.pdf', ''),
+                        style: TextStyle(
+                          color: Colors.red.shade900,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      tileColor: Colors.pink[50], // Set tile background color
+                      contentPadding: EdgeInsets.all( 16.0),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.red.shade900,
+                      ),
                     ),
-                  ),
-                );
-              },
-              child: ListTile(
-                title: Text(
-                  fileName.replaceAll('.pdf', ''),
-                  style: TextStyle(
-                    color: Colors.pinkAccent,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                  );
+                },
               ),
-            );
-          },
-        ),
       ),
     );
   }
@@ -116,7 +121,7 @@ class PDFViewer extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.pink[50],
       ),
       body: PDFView(
         filePath: file.path,

@@ -20,13 +20,13 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    accelerometerEvents.listen((AccelerometerEvent event) {
-      // Check for shaking motion (you can adjust the threshold as needed)
-      if (event.x.abs() > 12 || event.y.abs() > 12 || event.z.abs() > 12) {
-        // Shake detected, trigger SOS action here
-        _sendSOS(context);
-      }
-    });
+    // accelerometerEvents.listen((AccelerometerEvent event) {
+    //   // Check for shaking motion (you can adjust the threshold as needed)
+    //   if (event.x.abs() > 12 || event.y.abs() > 12 || event.z.abs() > 12) {
+    //     // Shake detected, trigger SOS action here
+    //     _sendSOS(context);
+    //   }
+    // });
   }
 
   void _onItemTapped(int index) {
