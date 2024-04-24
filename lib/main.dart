@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import Firebase Core
 import 'package:test1/Screens/notes_screen.dart';
@@ -10,17 +11,45 @@ void main() async {
 
   runApp(MyApp());
 }
-class MyApp extends StatelessWidget {
 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
-      home: MainApp(),
+      home: SplashScreen(), // Set the splash screen as the home screen
       debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Add a delay for the splash screen to be displayed for a certain duration
+    Future.delayed(Duration(seconds: 2), () {
+      // Navigate to the main app after the splash screen duration
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MainApp()),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Image.asset('assets/sosimg.png'),
+      ),
     );
   }
 }
@@ -55,7 +84,6 @@ class _MainAppState extends State<MainApp> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.contacts), label: 'Contacts'),
           BottomNavigationBarItem(icon: Icon(Icons.article_outlined), label: 'Articles')
-
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.red[900], // Active icon color

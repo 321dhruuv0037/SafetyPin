@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sensors/sensors.dart'; // Import sensors package for shake to SOS feature
+//import 'package:sensors/sensors.dart'; // Import sensors package for shake to SOS feature
 import 'package:test1/model/navBar.dart';
 import 'package:test1/screens/notes_screen.dart'; // Adjusted import path
 import 'package:test1/services/database_helper.dart';

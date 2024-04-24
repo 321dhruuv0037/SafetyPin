@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.pinkAccent,
         hintColor: Colors.pinkAccent,
-        textTheme: TextTheme(
-          headline6: TextStyle(color: Colors.pinkAccent, fontSize: 20),
-          bodyText1: TextStyle(color: Colors.black, fontSize: 16),
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(color: Colors.pinkAccent, fontSize: 20),
+          bodyLarge: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
       home: Activity(),
