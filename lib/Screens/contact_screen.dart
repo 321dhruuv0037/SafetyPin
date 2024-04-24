@@ -35,7 +35,7 @@ class _NoteScreenState extends State<NoteScreen> {
       return 'Contact number cannot be empty';
     } else if (value.length < 10) {
       return 'Contact number must be at least 10 digits long';
-    } else if (!RegExp(r'^[0-9()-\s]+$').hasMatch(value)) {
+    } else if (!RegExp(r'^[\d\(\)\-\s]+$').hasMatch(value)) {
       return 'Contact number can only contain numbers, hyphens, parentheses, and spaces';
     }
     return null;
