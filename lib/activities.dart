@@ -45,12 +45,12 @@ class _ActivityState extends State<Activity> {
   }
 
   Future<void> _loadPDFFiles() async {
-    final String pdfPath = 'assets/SOS.pdf';
+    final String pdfPath = 'assets/First_Aid_Instructions.pdf';
     final ByteData data = await rootBundle.load(pdfPath);
     final Uint8List bytes = data.buffer.asUint8List();
 
     final tempDir = Directory.systemTemp;
-    final tempFile = File('${tempDir.path}/SOS.pdf');
+    final tempFile = File('${tempDir.path}/First_Aid_Instructions.pdf');
     await tempFile.writeAsBytes(bytes);
 
     setState(() {

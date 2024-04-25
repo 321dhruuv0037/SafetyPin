@@ -75,6 +75,7 @@ flutter:
   assets:
     - assets/SOS.pdf
     - assets/sosimg.png
+    - assets/First_Aid_Instructions.pdf
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
