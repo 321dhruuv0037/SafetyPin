@@ -11,7 +11,10 @@ SafetyPin is an SOS application developed using Flutter, allowing users to quick
 
 ## Screenshots
 
-[Add screenshots of app here]
+![Screenshot 1](https://github.com/321dhruuv0037/SafetyPin/blob/main/assets/Main.png)
+![Screenshot 2](https://github.com/321dhruuv0037/SafetyPin/blob/main/assets/Contacts.png)
+![Screenshot 3](https://github.com/321dhruuv0037/SafetyPin/blob/main/assets/Drawer.png)
+
 
 ## Technologies Used
 
