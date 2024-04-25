@@ -1,14 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart'; // Import Firebase Core
 import 'package:test1/Screens/notes_screen.dart';
 import 'package:test1/activities.dart';
 import 'home.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensure that Flutter is initialized
-  await Firebase.initializeApp(); // Initialize Firebase
-
   runApp(MyApp());
 }
 
@@ -82,16 +78,18 @@ class _MainAppState extends State<MainApp> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.contacts), label: 'Contacts'),
-          BottomNavigationBarItem(icon: Icon(Icons.article_outlined), label: 'Articles')
+          BottomNavigationBarItem(
+              icon: Icon(Icons.contacts), label: 'Contacts'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.article_outlined), label: 'Articles')
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.red[900], // Active icon color
         selectedLabelStyle:
-        TextStyle(color: Colors.red[900]), // Active label color
+            TextStyle(color: Colors.red[900]), // Active label color
         unselectedItemColor: Colors.grey[600], // Inactive icon color
         unselectedLabelStyle:
-        TextStyle(color: Colors.grey[600]), // Inactive label color
+            TextStyle(color: Colors.grey[600]), // Inactive label color
         onTap: _onItemTapped,
       ),
     );
